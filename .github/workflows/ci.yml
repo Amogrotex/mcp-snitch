@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        node: [20, 22]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm ci
+      - run: npm run lint
+      - run: npm test
+      - run: npm run build
+      - name: End-to-end smoke (proxy + demo server)
+        run: |
+          node examples/smoke-client.mjs | node dist/index.js run --name demo-notes -- node examples/demo-server.mjs > /tmp/out.jsonl 2> /tmp/err.log || true
+          grep -q '"method":"initialize"' /tmp/out.jsonl
+          grep -q 'read_note' /tmp/out.jsonl

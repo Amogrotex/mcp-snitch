@@ -1,0 +1,42 @@
+{
+  "name": "mcp-snitch",
+  "version": "0.1.0",
+  "description": "Little Snitch for MCP — an interactive runtime firewall for Model Context Protocol tool calls.",
+  "type": "module",
+  "bin": {
+    "mcp-snitch": "dist/index.js"
+  },
+  "files": [
+    "dist",
+    "assets",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsc -p tsconfig.json --watch",
+    "lint": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "demo": "npm run build && node examples/smoke-client.mjs | node dist/index.js run --name demo-notes -- node examples/demo-server.mjs",
+    "prepublishOnly": "npm run lint && npm run test && npm run build"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "security",
+    "firewall",
+    "llm",
+    "ai-agents",
+    "prompt-injection",
+    "runtime-protection"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.7.0",
+    "vitest": "^2.1.8"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "mcp-snitch",
+      "args": [
+        "run",
+        "--name",
+        "filesystem",
+        "--",
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/home/me/projects"
+      ]
+    }
+  }
+}
