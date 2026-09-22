@@ -10,6 +10,7 @@
 </p>
 
 <p align="center">
+  <a href="https://www.npmjs.com/package/mcp-snitch"><img src="https://img.shields.io/npm/v/mcp-snitch.svg?label=npm" alt="npm version" /></a>
   <a href="https://github.com/Amogrotex/mcp-snitch/actions/workflows/ci.yml"><img src="https://github.com/Amogrotex/mcp-snitch/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
   <img src="https://img.shields.io/badge/version-0.1.0-orange.svg" alt="version 0.1.0" />
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License" /></a>
@@ -19,8 +20,7 @@
 </p>
 
 <p align="center">
-  <code>npm i -g mcp-snitch</code> isn't a thing yet — <b>build from source in 60 seconds</b> (below).
-  No account. No daemon. No telemetry. No network calls. Ever.
+  <code>npm i -g mcp-snitch</code> · no account · no daemon · no telemetry · no network calls. Ever.
 </p>
 
 ---
@@ -168,29 +168,40 @@ diffed on every subsequent `tools/list`.
 
 ## Quick start
 
-```bash
-git clone https://github.com/Amogrotex/mcp-snitch.git
-cd mcp-snitch
-npm install
-npm run build
-npm link            # puts `mcp-snitch` on your PATH
+### Install from npm
 
-mcp-snitch install   # wraps every MCP server in your client configs (backed up first)
-mcp-snitch status    # verify
+```bash
+npm i -g mcp-snitch     # or use npx, no install needed
+
+mcp-snitch install      # wraps every MCP server in your client configs (backed up first)
+mcp-snitch status       # verify
 ```
 
 Restart your client. Done — every local MCP server now runs through the gate.
 
-Prefer to see it first, without touching your configs?
+### Or try it first, without touching your configs
 
 ```bash
-npm run demo         # smoke client → proxy → demo server, alerts on stderr
+# one-off, straight from npm
+npx mcp-snitch run --name filesystem -- npx -y @modelcontextprotocol/server-filesystem /tmp
+
+# or clone the repo and run the built-in demo (alerts on stderr)
+git clone https://github.com/Amogrotex/mcp-snitch.git && cd mcp-snitch
+npm install && npm run demo
 ```
 
 | Try the attacks | |
 |---|---|
 | `DEMO_RUGPULL=1 npm run demo` | second session returns a poisoned/changed description |
 | `DEMO_INJECT=1 npm run demo`  | tool result hides an instruction-override payload |
+
+### Build from source
+
+```bash
+git clone https://github.com/Amogrotex/mcp-snitch.git
+cd mcp-snitch
+npm install && npm run build && npm link
+```
 
 ## Modes
 

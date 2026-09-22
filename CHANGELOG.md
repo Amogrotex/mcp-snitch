@@ -5,6 +5,10 @@ Format: [Keep a Changelog](https://keepachangelog.com/), versioning: [SemVer](ht
 
 ## [0.1.0] — 2026-09-22
 
+### Published
+- npm: [`mcp-snitch@0.1.0`](https://www.npmjs.com/package/mcp-snitch) — `npm i -g mcp-snitch`
+- GitHub: https://github.com/Amogrotex/mcp-snitch
+
 ### Added
 - Transparent MCP proxy (`mcp-snitch run`) with allow/deny evaluation per `tools/call`
 - Modes: `learn` (default), `strict` (fail closed), `off`
