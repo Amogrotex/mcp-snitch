@@ -34,6 +34,14 @@
     "runtime-protection"
   ],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Amogrotex/mcp-snitch.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Amogrotex/mcp-snitch/issues"
+  },
+  "homepage": "https://github.com/Amogrotex/mcp-snitch#readme",
   "devDependencies": {
     "@types/node": "^22.10.0",
     "typescript": "^5.7.0",

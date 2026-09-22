@@ -2,10 +2,12 @@
 
 Thanks for helping make agent traffic observable.
 
+**Repo:** https://github.com/Amogrotex/mcp-snitch
+
 ## Development setup
 
 ```bash
-git clone https://github.com/mcp-snitch/mcp-snitch
+git clone https://github.com/Amogrotex/mcp-snitch.git
 cd mcp-snitch
 npm install
 npm run build
