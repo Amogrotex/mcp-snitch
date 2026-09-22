@@ -23,6 +23,19 @@ jobs:
       - run: npm run build
       - name: End-to-end smoke (proxy + demo server)
         run: |
-          node examples/smoke-client.mjs | node dist/index.js run --name demo-notes -- node examples/demo-server.mjs > /tmp/out.jsonl 2> /tmp/err.log || true
-          grep -q '"method":"initialize"' /tmp/out.jsonl
+          set -euo pipefail
+          node examples/smoke-client.mjs \
+            | node dist/index.js run --name demo-notes -- node examples/demo-server.mjs \
+            > /tmp/out.jsonl 2> /tmp/err.log || true
+          echo "--- proxy stderr (alerts) ---"; cat /tmp/err.log
+          echo "--- client received ---"; cat /tmp/out.jsonl
+          # Handshake completed: initialize response carries serverInfo
+          grep -q '"serverInfo"' /tmp/out.jsonl
+          # Tool inventory came through
           grep -q 'read_note' /tmp/out.jsonl
+          # All 5 responses arrived (initialize, list, 3 calls)
+          test "$(grep -c '"id":' /tmp/out.jsonl)" -ge 5
+          # The proxy actually ran and alerted on the suspicious call
+          grep -q 'session start' /tmp/err.log
+          grep -q 'ALLOWED demo-notes.send_note' /tmp/err.log
+          echo "smoke OK"
